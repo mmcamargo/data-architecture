@@ -1,10 +1,10 @@
-# Back-end I API
+# Data Architecture
 
-This repository contains the back-end portion of a web application developed as part of the Back-end I module at [Growdev](https://www.growdev.com.br/).
+This repository presents a refactored version of [back-end-I-api](https://github.com/mmcamargo/back-end-I-api) that follows a design pattern developed as part of the Data Architecture module at [Growdev](https://www.growdev.com.br/).
 
 ## Table of Contents
 
--   [Back-end I API](#back-end-i-api)
+-   [Data Architecture](#data-architecture)
     -   [Table of Contents](#table-of-contents)
     -   [Description](#description)
     -   [Technologies](#technologies)
@@ -15,7 +15,7 @@ This repository contains the back-end portion of a web application developed as 
 
 ## Description
 
-This repository houses the back-end of a web application developed as a requirement for the Back-end I module. The API has been designed to facilitate efficient consumption by the [front-end](https://github.com/mmcamargo/back-end-I) developed in parallel while maintaining well-structured code. Initially, the API doesn't rely on any database. However, in the Database I module, the project was refactored to be integrated with a Postgres database utilizing TypeORM.
+This API is an improved version of the previous one in terms of project structure. The main features remain the same, but the organization, performance, and maintainability are superior. The proposed design pattern is based on the Factory Method.
 
 ## Technologies
 
@@ -24,6 +24,7 @@ The technologies used in this project include:
 -   TypeScript
 -   Express
 -   TypeORM
+-   Postgres
 
 ## Installation
 
@@ -41,7 +42,7 @@ npm install
 
 ## Usage
 
-You can access the live API [here](http://mm-back-end-i-api.vercel.app) or start the development server after installation:
+You can access the live API [here](http://data-architecture.vercel.app) or start the development server after installation:
 
 ```bash
 npm run dev
