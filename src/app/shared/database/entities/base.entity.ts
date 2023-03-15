@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import { v4 } from 'uuid';
 
-abstract class BaseEntity {
+export abstract class BaseEntity {
 	@PrimaryColumn()
 	uid!: string;
 
@@ -28,5 +28,3 @@ abstract class BaseEntity {
 		this.updatedAt = new Date();
 	}
 }
-
-export default BaseEntity;

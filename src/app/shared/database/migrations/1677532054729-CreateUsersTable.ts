@@ -1,15 +1,10 @@
-import {
-	MigrationInterface,
-	QueryRunner,
-	Table,
-	TableForeignKey,
-} from 'typeorm';
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-class CreateTasksTable1677532160680 implements MigrationInterface {
+export class CreateUsersTable1677532054729 implements MigrationInterface {
 	public async up(queryRunner: QueryRunner): Promise<void> {
 		await queryRunner.createTable(
 			new Table({
-				name: 'tasks',
+				name: 'users',
 				columns: [
 					{
 						name: 'uid',
@@ -19,24 +14,26 @@ class CreateTasksTable1677532160680 implements MigrationInterface {
 						isUnique: true,
 					},
 					{
-						name: 'user_uid',
-						type: 'uuid',
-						isNullable: false,
-						isUnique: false,
-					},
-					{
-						name: 'is_archived',
-						type: 'boolean',
-						default: false,
-					},
-					{
-						name: 'title',
+						name: 'first_name',
 						type: 'varchar',
 						isNullable: false,
 						length: '255',
 					},
 					{
-						name: 'content',
+						name: 'last_name',
+						type: 'varchar',
+						isNullable: false,
+						length: '255',
+					},
+					{
+						name: 'email',
+						type: 'varchar',
+						isNullable: false,
+						isUnique: true,
+						length: '255',
+					},
+					{
+						name: 'password',
 						type: 'varchar',
 						isNullable: false,
 						length: '255',
@@ -52,22 +49,11 @@ class CreateTasksTable1677532160680 implements MigrationInterface {
 						isNullable: true,
 					},
 				],
-				foreignKeys: [
-					new TableForeignKey({
-						name: 'fk_task_user',
-						columnNames: ['user_uid'],
-						referencedColumnNames: ['uid'],
-						referencedTableName: 'users',
-						onDelete: 'CASCADE',
-					}),
-				],
 			})
 		);
 	}
 
 	public async down(queryRunner: QueryRunner): Promise<void> {
-		await queryRunner.dropTable('tasks', true, true, true);
+		await queryRunner.dropTable('users', true, true, true);
 	}
 }
-
-export default CreateTasksTable1677532160680;

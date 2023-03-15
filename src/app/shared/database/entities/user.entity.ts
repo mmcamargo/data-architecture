@@ -2,7 +2,7 @@ import { BaseEntity, TaskEntity } from '.';
 import { Entity, Column, OneToMany, JoinColumn } from 'typeorm';
 
 @Entity({ name: 'users' })
-class UserEntity extends BaseEntity {
+export class UserEntity extends BaseEntity {
 	@Column({ name: 'first_name' })
 	firstName!: string;
 
@@ -19,5 +19,3 @@ class UserEntity extends BaseEntity {
 	@JoinColumn({ name: 'uid', referencedColumnName: 'user_uid' })
 	tasks?: TaskEntity[];
 }
-
-export default UserEntity;

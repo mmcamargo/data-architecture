@@ -5,6 +5,8 @@
 	"scripts": {
 		"dev": "ts-node-dev --respawn --transpile-only ./src/index.ts",
 		"build": "rimraf dist && tsc",
+		"ts.check": "tsc --project tsconfig.json",
+		"add-build": "git add dist",
 		"migration:create": "typeorm migration:create src/database/migrations/CreateTable",
 		"migration:show": "typeorm-ts-node-commonjs migration:show -d src/database/typeorm.ts",
 		"migration:run": "typeorm-ts-node-commonjs migration:run -d src/database/typeorm.ts",
@@ -30,5 +32,10 @@
 		"reflect-metadata": "^0.1.13",
 		"typeorm": "^0.3.12",
 		"uuid": "^9.0.0"
-	}
+	},
+	"pre-commit": [
+		"ts.check",
+		"build",
+		"add-build"
+	]
 }

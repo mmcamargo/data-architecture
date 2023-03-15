@@ -1,8 +1,8 @@
 import { BaseEntity, UserEntity } from '.';
-import { Entity, Column, ManyToOne, JoinColumn, BeforeInsert } from 'typeorm';
+import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
 
 @Entity({ name: 'tasks' })
-class TaskEntity extends BaseEntity {
+export class TaskEntity extends BaseEntity {
 	@Column({ name: 'user_uid' })
 	userUid!: string;
 
@@ -19,5 +19,3 @@ class TaskEntity extends BaseEntity {
 	@JoinColumn({ name: 'user_uid', referencedColumnName: 'uid' })
 	user!: UserEntity;
 }
-
-export default TaskEntity;

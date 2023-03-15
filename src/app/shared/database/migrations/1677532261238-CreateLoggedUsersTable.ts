@@ -5,7 +5,7 @@ import {
 	TableForeignKey,
 } from 'typeorm';
 
-class CreateLoggedUsersTable1677532261238 implements MigrationInterface {
+export class CreateLoggedUsersTable1677532261238 implements MigrationInterface {
 	public async up(queryRunner: QueryRunner): Promise<void> {
 		await queryRunner.createTable(
 			new Table({
@@ -57,5 +57,3 @@ class CreateLoggedUsersTable1677532261238 implements MigrationInterface {
 		await queryRunner.dropTable('logged_users', true, true, true);
 	}
 }
-
-export default CreateLoggedUsersTable1677532261238;
