@@ -20,12 +20,7 @@ export class UsersController {
 				password,
 			});
 
-			return HttpHelper.success(
-				res,
-				'USER_SUCCESSFULLY_CREATED',
-				response,
-				201
-			);
+			return HttpHelper.success(res, undefined, response, 201);
 		} catch (error: any) {
 			return HttpHelper.serverError(res, error);
 		}

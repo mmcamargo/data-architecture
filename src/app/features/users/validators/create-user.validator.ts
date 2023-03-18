@@ -1,4 +1,7 @@
-import { HttpHelper } from '../../../shared/utils/helpers';
+import {
+	HttpHelper,
+	DefaultMessagesHelper,
+} from '../../../shared/utils/helpers';
 import { CreateUserUseCase } from './../usecases/create-user.usecase';
 import { UsersRepository } from '../repositories';
 import { Request, Response, NextFunction } from 'express';
@@ -11,15 +14,27 @@ export const createUserValidator = async (
 	const { name, email, password } = req.body;
 
 	if (!name) {
-		return HttpHelper.badRequest(res, 'NAME_NOT_FOUND', 404);
+		return HttpHelper.badRequest(
+			res,
+			DefaultMessagesHelper.notFound('nome'),
+			404
+		);
 	}
 
 	if (!email) {
-		return HttpHelper.badRequest(res, 'EMAIL_NOT_FOUND', 404);
+		return HttpHelper.badRequest(
+			res,
+			DefaultMessagesHelper.notFound('e-mail'),
+			404
+		);
 	}
 
 	if (!password) {
-		return HttpHelper.badRequest(res, 'PASSWORD_NOT_FOUND', 404);
+		return HttpHelper.badRequest(
+			res,
+			DefaultMessagesHelper.notFound('senha'),
+			404
+		);
 	}
 
 	const useCase = new CreateUserUseCase(new UsersRepository());
@@ -27,7 +42,11 @@ export const createUserValidator = async (
 	const isEmailRegistered = await useCase.checkEmail(email);
 
 	if (isEmailRegistered) {
-		return HttpHelper.badRequest(res, 'EMAIL_ALREADY_REGISTERED', 400);
+		return HttpHelper.badRequest(
+			res,
+			DefaultMessagesHelper.duplicatedProperty('e-mail', email),
+			400
+		);
 	}
 
 	next();
