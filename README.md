@@ -1,10 +1,10 @@
-# Data Architecture
+# Data Architecture API
 
 This repository presents a refactored version of [back-end-I-api](https://github.com/mmcamargo/back-end-I-api) that follows a design pattern developed as part of the Data Architecture module at [Growdev](https://www.growdev.com.br/).
 
 ## Table of Contents
 
--   [Data Architecture](#data-architecture)
+-   [Data Architecture API](#data-architecture-api)
     -   [Table of Contents](#table-of-contents)
     -   [Description](#description)
     -   [Technologies](#technologies)
@@ -42,7 +42,7 @@ npm install
 
 ## Usage
 
-You can access the live API [here](http://data-architecture.vercel.app) or start the development server after installation:
+You can access the live API [here](http://data-architecture-api.vercel.app) or start the development server after installation:
 
 ```bash
 npm run dev
