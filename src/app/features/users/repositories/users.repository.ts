@@ -6,27 +6,14 @@ export class UsersRepository {
 	private _repository =
 		DatabaseConnection.connection.getRepository(UserEntity);
 
-	private toModel({
-		uid,
-		firstName,
-		lastName,
-		email,
-		password,
-	}: UserEntity): User {
-		return User.create(firstName, lastName, email, password, uid);
+	private toModel({ uid, name, email, password }: UserEntity): User {
+		return User.create(name, email, password, uid);
 	}
 
-	async create({
-		uid,
-		firstName,
-		lastName,
-		email,
-		password,
-	}: User): Promise<User> {
+	async create({ uid, name, email, password }: User): Promise<User> {
 		const user = this._repository.create({
 			uid,
-			firstName,
-			lastName,
+			name,
 			email,
 			password,
 		});
@@ -34,6 +21,12 @@ export class UsersRepository {
 		const response = await this._repository.save(user);
 
 		return this.toModel(response);
+	}
+
+	async checkEmail(email: string) {
+		const response = await this._repository.exist({ where: { email } });
+
+		return response;
 	}
 
 	async getUsers() {

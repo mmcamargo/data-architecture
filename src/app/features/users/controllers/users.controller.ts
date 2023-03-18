@@ -10,13 +10,12 @@ import { Response, Request } from 'express';
 export class UsersController {
 	async create(req: Request, res: Response) {
 		try {
-			const { firstName, lastName, email, password } = req.body;
+			const { name, email, password } = req.body;
 
 			const useCase = new CreateUserUseCase(new UsersRepository());
 
 			const response = await useCase.execute({
-				firstName,
-				lastName,
+				name,
 				email,
 				password,
 			});

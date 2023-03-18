@@ -14,13 +14,7 @@ export class CreateUsersTable1677532054729 implements MigrationInterface {
 						isUnique: true,
 					},
 					{
-						name: 'first_name',
-						type: 'varchar',
-						isNullable: false,
-						length: '255',
-					},
-					{
-						name: 'last_name',
+						name: 'name',
 						type: 'varchar',
 						isNullable: false,
 						length: '255',

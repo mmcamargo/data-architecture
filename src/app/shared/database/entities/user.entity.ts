@@ -3,11 +3,8 @@ import { Entity, Column, OneToMany, JoinColumn } from 'typeorm';
 
 @Entity({ name: 'users' })
 export class UserEntity extends BaseEntity {
-	@Column({ name: 'first_name' })
-	firstName!: string;
-
-	@Column({ name: 'last_name' })
-	lastName!: string;
+	@Column()
+	name!: string;
 
 	@Column()
 	email!: string;
