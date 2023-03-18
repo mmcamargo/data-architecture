@@ -1,4 +1,4 @@
-import { IDefaultResponse } from './interfaces';
+import { IDefaultResponse } from '../interfaces';
 import { Response } from 'express';
 
 export class HttpHelper {

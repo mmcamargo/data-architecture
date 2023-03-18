@@ -1,4 +1,4 @@
-import { HttpHelper } from '../../../shared/utils';
+import { HttpHelper } from '../../../shared/utils/helpers';
 import { CreateUserUseCase } from './../usecases/create-user.usecase';
 import { UsersRepository } from '../repositories';
 import { Request, Response, NextFunction } from 'express';

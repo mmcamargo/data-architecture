@@ -4,7 +4,7 @@ import {
 	GetUserByUidUseCase,
 } from '../usecases';
 import { UsersRepository } from '../repositories';
-import { HttpHelper } from '../../../shared/utils';
+import { HttpHelper } from '../../../shared/utils/helpers';
 import { Response, Request } from 'express';
 
 export class UsersController {
