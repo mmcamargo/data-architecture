@@ -2,7 +2,8 @@ import { UsersRepository } from '../repositories';
 import { User } from '../../../models';
 
 interface ICreateUserDTO {
-	name: string;
+	firstName: string;
+	lastName: string;
 	email: string;
 	password: string;
 }
@@ -10,8 +11,8 @@ interface ICreateUserDTO {
 export class CreateUserUseCase {
 	constructor(private _repository: UsersRepository) {}
 
-	async execute({ name, email, password }: ICreateUserDTO) {
-		const user = await User.create(name, email, password);
+	async execute({ firstName, lastName, email, password }: ICreateUserDTO) {
+		const user = await User.create(firstName, lastName, email, password);
 
 		return await this._repository.create(user);
 	}

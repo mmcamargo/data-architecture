@@ -2,25 +2,40 @@ import { v4 } from 'uuid';
 
 export class User {
 	uid: string;
-	name: string;
+	firstName: string;
+	lastName: string;
 	email: string;
 	password: string;
 
-	constructor(name: string, email: string, password: string, uid?: string) {
+	constructor(
+		firstName: string,
+		lastName: string,
+		email: string,
+		password: string,
+		uid?: string
+	) {
 		this.uid = uid ?? v4();
-		this.name = name;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 	}
 
-	static create(name: string, email: string, password: string, uid?: string) {
-		return new User(name, email, password, uid);
+	static create(
+		firstName: string,
+		lastName: string,
+		email: string,
+		password: string,
+		uid?: string
+	) {
+		return new User(firstName, lastName, email, password, uid);
 	}
 
 	toJson() {
 		return {
 			uid: this.uid,
-			name: this.name,
+			firstName: this.firstName,
+			lastName: this.lastName,
 			email: this.email,
 			password: this.password,
 		};

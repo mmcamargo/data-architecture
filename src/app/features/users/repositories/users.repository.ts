@@ -6,14 +6,27 @@ export class UsersRepository {
 	private _repository =
 		DatabaseConnection.connection.getRepository(UserEntity);
 
-	private toModel({ uid, name, email, password }: UserEntity): User {
-		return User.create(name, email, password, uid);
+	private toModel({
+		uid,
+		firstName,
+		lastName,
+		email,
+		password,
+	}: UserEntity): User {
+		return User.create(firstName, lastName, email, password, uid);
 	}
 
-	async create({ uid, name, email, password }: User): Promise<User> {
+	async create({
+		uid,
+		firstName,
+		lastName,
+		email,
+		password,
+	}: User): Promise<User> {
 		const user = this._repository.create({
 			uid,
-			name,
+			firstName,
+			lastName,
 			email,
 			password,
 		});
@@ -37,6 +50,14 @@ export class UsersRepository {
 
 	async getUserByUid(uid: string) {
 		const response = await this._repository.findOne({ where: { uid } });
+
+		return response;
+	}
+
+	async getUserByEmail(email: string) {
+		const response = await this._repository.findOneBy({
+			email,
+		});
 
 		return response;
 	}

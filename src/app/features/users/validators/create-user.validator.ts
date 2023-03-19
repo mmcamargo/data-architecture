@@ -11,12 +11,20 @@ export const createUserValidator = async (
 	res: Response,
 	next: NextFunction
 ) => {
-	const { name, email, password } = req.body;
+	const { firstName, lastName, email, password } = req.body;
 
-	if (!name) {
+	if (!firstName) {
 		return HttpHelper.badRequest(
 			res,
 			DefaultMessagesHelper.notFound('nome'),
+			404
+		);
+	}
+
+	if (!lastName) {
+		return HttpHelper.badRequest(
+			res,
+			DefaultMessagesHelper.notFound('sobrenome'),
 			404
 		);
 	}
