@@ -36,12 +36,6 @@ export class UsersRepository {
 		return this.toModel(response);
 	}
 
-	async checkEmail(email: string) {
-		const response = await this._repository.exist({ where: { email } });
-
-		return response;
-	}
-
 	async getUsers() {
 		const response = await this._repository.find();
 
@@ -58,6 +52,18 @@ export class UsersRepository {
 		const response = await this._repository.findOneBy({
 			email,
 		});
+
+		return response;
+	}
+
+	async checkEmail(email: string) {
+		const response = await this._repository.exist({ where: { email } });
+
+		return response;
+	}
+
+	async checkUserUid(uid: string) {
+		const response = await this._repository.exist({ where: { uid } });
 
 		return response;
 	}
