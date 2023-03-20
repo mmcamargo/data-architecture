@@ -42,7 +42,7 @@ npm install
 
 ## Usage
 
-You can access the live API [here](http://data-architecture-api.vercel.app) or start the development server after installation:
+You can access the live API [here](http://mm-data-architecture-api.vercel.app) or start the development server after installation:
 
 ```bash
 npm run dev
