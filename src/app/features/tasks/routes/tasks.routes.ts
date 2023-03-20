@@ -1,4 +1,4 @@
-import { createTaskValidator } from '../validators/create-user.validator';
+import { createTaskValidator, updateTaskValidator } from '../validators';
 import { TasksController } from '../controllers/tasks.controller';
 import { Router } from 'express';
 
@@ -10,6 +10,10 @@ tasksRouter.post(
 	new TasksController().create
 );
 
-// tasksRouter.get('/', new UsersController().getUsers);
+tasksRouter.get('/:uid', new TasksController().getUserTasks);
 
-// tasksRouter.get('/:uid', new UsersController().getUserByUid);
+tasksRouter.put(
+	'/:uid',
+	[updateTaskValidator],
+	new TasksController().updateTask
+);

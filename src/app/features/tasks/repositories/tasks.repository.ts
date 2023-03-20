@@ -2,6 +2,12 @@ import { DatabaseConnection } from '../../../../main/database';
 import { TaskEntity } from '../../../shared/database/entities';
 import { Task } from '../../../models';
 
+interface ITaskUpdateData {
+	isArchived?: boolean;
+	title?: string;
+	content?: string;
+}
+
 export class TasksRepository {
 	private _repository =
 		DatabaseConnection.connection.getRepository(TaskEntity);
@@ -36,23 +42,38 @@ export class TasksRepository {
 		return this.toModel(response);
 	}
 
-	// async getUsers() {
-	// 	const response = await this._repository.find();
+	async getUserTasks(userUid: string) {
+		const response = await this._repository.findBy({ userUid });
 
-	// 	return response;
-	// }
+		return response;
+	}
 
-	// async getUserByUid(uid: string) {
-	// 	const response = await this._repository.findOne({ where: { uid } });
+	async updateTask(
+		uid: string,
+		isArchived: boolean,
+		title: string,
+		content: string
+	) {
+		const data: ITaskUpdateData = {};
 
-	// 	return response;
-	// }
+		if (isArchived !== undefined && isArchived !== null) {
+			data['isArchived'] = isArchived;
+		}
+		if (title) {
+			data['title'] = title;
+		}
+		if (content) {
+			data['content'] = content;
+		}
 
-	// async getUserByEmail(email: string) {
-	// 	const response = await this._repository.findOneBy({
-	// 		email,
-	// 	});
+		const response = await this._repository.update(uid, data);
 
-	// 	return response;
-	// }
+		return response;
+	}
+
+	async checkTaskUid(uid: string) {
+		const response = await this._repository.exist({ where: { uid } });
+
+		return response;
+	}
 }

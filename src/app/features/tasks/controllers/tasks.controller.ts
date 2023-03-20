@@ -1,4 +1,8 @@
-import { CreateTaskUseCase } from '../usecases';
+import {
+	CreateTaskUseCase,
+	GetUserTasksUseCase,
+	UpdateTaskUseCase,
+} from '../usecases';
 import { TasksRepository } from '../repositories';
 import { HttpHelper } from '../../../shared/utils/helpers';
 import { Response, Request } from 'express';
@@ -22,29 +26,37 @@ export class TasksController {
 		}
 	}
 
-	// async getUsers(_: Request, res: Response) {
-	// 	try {
-	// 		const useCase = new GetUsersUseCase(new UsersRepository());
+	async getUserTasks(req: Request, res: Response) {
+		try {
+			const { userUid } = req.params;
 
-	// 		const response = await useCase.execute();
+			const useCase = new GetUserTasksUseCase(new TasksRepository());
 
-	// 		return HttpHelper.success(res, undefined, response);
-	// 	} catch (error: any) {
-	// 		return HttpHelper.serverError(res, error);
-	// 	}
-	// }
+			const response = await useCase.execute(userUid);
 
-	// async getUserByUid(req: Request, res: Response) {
-	// 	try {
-	// 		const { uid } = req.params;
+			return HttpHelper.success(res, undefined, response);
+		} catch (error: any) {
+			return HttpHelper.serverError(res, error);
+		}
+	}
 
-	// 		const useCase = new GetUserByUidUseCase(new UsersRepository());
+	async updateTask(req: Request, res: Response) {
+		try {
+			const { uid } = req.params;
+			const { isArchived, title, content } = req.body;
 
-	// 		const response = await useCase.execute(uid);
+			const useCase = new UpdateTaskUseCase(new TasksRepository());
 
-	// 		return HttpHelper.success(res, undefined, response);
-	// 	} catch (error: any) {
-	// 		return HttpHelper.serverError(res, error);
-	// 	}
-	// }
+			const response = await useCase.execute(
+				uid,
+				isArchived,
+				title,
+				content
+			);
+
+			return HttpHelper.success(res, undefined, response);
+		} catch (error: any) {
+			return HttpHelper.serverError(res, error);
+		}
+	}
 }

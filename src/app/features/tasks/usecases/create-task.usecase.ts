@@ -15,13 +15,17 @@ export class CreateTaskUseCase {
 		const task = await Task.create(userUid, title, content);
 
 		if (this._repository instanceof TasksRepository) {
-			return await this._repository.create(task);
+			const response = await this._repository.create(task);
+
+			return response;
 		}
 	}
 
 	async checkUserUid(userUid: string) {
 		if (this._repository instanceof UsersRepository) {
-			return await this._repository.checkUserUid(userUid);
+			const response = await this._repository.checkUserUid(userUid);
+
+			return response;
 		}
 	}
 }

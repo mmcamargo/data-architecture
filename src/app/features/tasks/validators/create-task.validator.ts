@@ -3,7 +3,7 @@ import {
 	DefaultMessagesHelper,
 } from '../../../shared/utils/helpers';
 import { CreateTaskUseCase } from '../usecases/create-task.usecase';
-import { UsersRepository } from './../../users/repositories/users.repository';
+import { UsersRepository } from '../../users/repositories/users.repository';
 import { Request, Response, NextFunction } from 'express';
 
 export const createTaskValidator = async (
