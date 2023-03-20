@@ -1,4 +1,8 @@
-import { createTaskValidator, updateTaskValidator } from '../validators';
+import {
+	createTaskValidator,
+	updateTaskValidator,
+	deleteTaskValidator,
+} from '../validators';
 import { TasksController } from '../controllers/tasks.controller';
 import { Router } from 'express';
 
@@ -16,4 +20,10 @@ tasksRouter.put(
 	'/:uid',
 	[updateTaskValidator],
 	new TasksController().updateTask
+);
+
+tasksRouter.delete(
+	'/:uid',
+	[deleteTaskValidator],
+	new TasksController().deleteTask
 );

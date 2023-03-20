@@ -71,6 +71,12 @@ export class TasksRepository {
 		return response;
 	}
 
+	async deleteTask(uid: string) {
+		const response = await this._repository.delete({ uid });
+
+		return response;
+	}
+
 	async checkTaskUid(uid: string) {
 		const response = await this._repository.exist({ where: { uid } });
 

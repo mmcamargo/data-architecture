@@ -2,6 +2,7 @@ import {
 	CreateTaskUseCase,
 	GetUserTasksUseCase,
 	UpdateTaskUseCase,
+	DeleteTaskUseCase,
 } from '../usecases';
 import { TasksRepository } from '../repositories';
 import { HttpHelper } from '../../../shared/utils/helpers';
@@ -53,6 +54,20 @@ export class TasksController {
 				title,
 				content
 			);
+
+			return HttpHelper.success(res, undefined, response);
+		} catch (error: any) {
+			return HttpHelper.serverError(res, error);
+		}
+	}
+
+	async deleteTask(req: Request, res: Response) {
+		try {
+			const { uid } = req.params;
+
+			const useCase = new DeleteTaskUseCase(new TasksRepository());
+
+			const response = await useCase.execute(uid);
 
 			return HttpHelper.success(res, undefined, response);
 		} catch (error: any) {
