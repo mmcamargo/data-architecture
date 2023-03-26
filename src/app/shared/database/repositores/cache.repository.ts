@@ -15,10 +15,6 @@ export class CacheRepository {
 		await this.redis.set(key, JSON.stringify(value));
 	}
 
-	public async setEX(key: string, value: any, ttl: number): Promise<void> {
-		await this.redis.set(key, JSON.stringify(value), 'EX', ttl);
-	}
-
 	public async del(key: string): Promise<void> {
 		await this.redis.del(key);
 	}

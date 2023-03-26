@@ -1,6 +1,8 @@
 import { TasksRepository } from '../repositories';
 import { UsersRepository } from '../../users/repositories';
+import { CacheRepository } from './../../../shared/database/repositores/cache.repository';
 import { Task } from '../../../models';
+import { GetUserTasksUseCase } from './get-user-tasks.usecase';
 
 interface ICreateTaskDTO {
 	userUid: string;
@@ -17,6 +19,9 @@ export class CreateTaskUseCase {
 		if (this._repository instanceof TasksRepository) {
 			const response = await this._repository.create(task);
 
+			this.setUserTasksCache(userUid);
+			this.setTaskCache(task);
+
 			return response;
 		}
 	}
@@ -27,5 +32,21 @@ export class CreateTaskUseCase {
 
 			return response;
 		}
+	}
+
+	async setUserTasksCache(userUid: string) {
+		const userTasks = await new GetUserTasksUseCase(
+			new TasksRepository()
+		).execute(userUid, true);
+
+		const cacheRepository = new CacheRepository();
+
+		cacheRepository.set(`USER_TASKS_LIST_${userUid}`, userTasks);
+	}
+
+	async setTaskCache(task: Task) {
+		const cacheRepository = new CacheRepository();
+
+		cacheRepository.set(`TASK_${task.uid}`, task);
 	}
 }

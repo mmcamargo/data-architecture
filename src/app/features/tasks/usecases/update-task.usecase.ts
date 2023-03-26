@@ -1,4 +1,6 @@
 import { TasksRepository } from '../repositories';
+import { GetUserTasksUseCase } from './get-user-tasks.usecase';
+import { CacheRepository } from './../../../shared/database/repositores/cache.repository';
 
 export class UpdateTaskUseCase {
 	constructor(private _repository: TasksRepository) {}
@@ -7,7 +9,8 @@ export class UpdateTaskUseCase {
 		uid: string,
 		isArchived: boolean,
 		title: string,
-		content: string
+		content: string,
+		userUid: string
 	) {
 		const response = await this._repository.updateTask(
 			uid,
@@ -16,6 +19,8 @@ export class UpdateTaskUseCase {
 			content
 		);
 
+		this.setUserTasksCache(userUid);
+
 		return response;
 	}
 
@@ -23,5 +28,15 @@ export class UpdateTaskUseCase {
 		const response = await this._repository.checkTaskUid(uid);
 
 		return response;
+	}
+
+	async setUserTasksCache(userUid: string) {
+		const userTasks = await new GetUserTasksUseCase(
+			new TasksRepository()
+		).execute(userUid, true);
+
+		const cacheRepository = new CacheRepository();
+
+		cacheRepository.set(`USER_TASKS_LIST_${userUid}`, userTasks);
 	}
 }

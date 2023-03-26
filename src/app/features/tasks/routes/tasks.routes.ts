@@ -2,6 +2,7 @@ import {
 	createTaskValidator,
 	checkTaskValidator,
 	updateTaskValidator,
+	deleteTaskValidator,
 } from '../validators';
 import { TasksController } from '../controllers/tasks.controller';
 import { Router } from 'express';
@@ -14,7 +15,7 @@ tasksRouter.post(
 	new TasksController().create
 );
 
-tasksRouter.get('/:uid', new TasksController().getUserTasks);
+tasksRouter.get('/:userUid', new TasksController().getUserTasks);
 
 tasksRouter.put(
 	'/:uid',
@@ -24,6 +25,6 @@ tasksRouter.put(
 
 tasksRouter.delete(
 	'/:uid',
-	[checkTaskValidator],
+	[checkTaskValidator, deleteTaskValidator],
 	new TasksController().deleteTask
 );

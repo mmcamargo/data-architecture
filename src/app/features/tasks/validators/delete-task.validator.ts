@@ -1,16 +1,12 @@
 import { HttpHelper } from '../../../shared/utils/helpers';
 import { Request, Response, NextFunction } from 'express';
 
-export const updateTaskValidator = async (
+export const deleteTaskValidator = async (
 	req: Request,
 	res: Response,
 	next: NextFunction
 ) => {
-	const { isArchived, title, content, userUid } = req.body;
-
-	if (!isArchived && !title && !content) {
-		return HttpHelper.badRequest(res, 'Nenhum valor encontrado.', 404);
-	}
+	const { userUid } = req.query;
 
 	if (!userUid) {
 		return HttpHelper.badRequest(

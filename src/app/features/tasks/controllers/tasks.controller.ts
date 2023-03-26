@@ -44,7 +44,7 @@ export class TasksController {
 	async updateTask(req: Request, res: Response) {
 		try {
 			const { uid } = req.params;
-			const { isArchived, title, content } = req.body;
+			const { isArchived, title, content, userUid } = req.body;
 
 			const useCase = new UpdateTaskUseCase(new TasksRepository());
 
@@ -52,7 +52,8 @@ export class TasksController {
 				uid,
 				isArchived,
 				title,
-				content
+				content,
+				userUid
 			);
 
 			return HttpHelper.success(res, undefined, response);
@@ -64,10 +65,11 @@ export class TasksController {
 	async deleteTask(req: Request, res: Response) {
 		try {
 			const { uid } = req.params;
+			const { userUid } = req.query;
 
 			const useCase = new DeleteTaskUseCase(new TasksRepository());
 
-			const response = await useCase.execute(uid);
+			const response = await useCase.execute(uid, String(userUid));
 
 			return HttpHelper.success(res, undefined, response);
 		} catch (error: any) {
