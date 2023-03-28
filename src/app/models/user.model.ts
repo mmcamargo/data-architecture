@@ -14,11 +14,11 @@ export class User {
 		password: string,
 		uid?: string
 	) {
-		this.uid = uid ?? v4();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
+		this.uid = uid ?? v4();
 	}
 
 	static create(

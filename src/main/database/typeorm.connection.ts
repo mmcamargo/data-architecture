@@ -20,4 +20,12 @@ export class DatabaseConnection {
 
 		return this._connection;
 	}
+
+	public static async destroy() {
+		if (!this._connection) {
+			throw new Error('DATABASE_NOT_CONNECTED');
+		}
+
+		await this._connection.destroy();
+	}
 }

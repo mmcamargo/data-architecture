@@ -12,7 +12,11 @@ export class CreateUserUseCase {
 	constructor(private _repository: UsersRepository) {}
 
 	async execute({ firstName, lastName, email, password }: ICreateUserDTO) {
-		const user = await User.create(firstName, lastName, email, password);
+		if ([firstName, lastName, email, password].includes('')) {
+			throw new Error('User not created.');
+		}
+
+		const user = User.create(firstName, lastName, email, password);
 
 		return await this._repository.create(user);
 	}
