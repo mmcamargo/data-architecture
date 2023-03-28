@@ -13,7 +13,7 @@
 		"test:verbose": "jest -verbose -runInBand -detectOpenHandles",
 		"test:coverage": "jest -runInBand -coverage",
 		"test:watch": "jest -silent -noStackTrace -runInBand -watchAll",
-		"test:unit": "jest -c jest.unit.config.ts -silent -noStackTrace -runInBand",
+		"test:unit": "jest -c jest.unit.config.ts --silent --noStackTrace --runInBand",
 		"test:unit:verbose": "jest -c jest.unit.config.ts -verbose -runInBand -detectOpenHandles",
 		"test:unit:coverage": "jest -c jest.unit.config.ts -silent -noStackTrace -runInBand -coverage",
 		"test:unit:watch": "jest -c jest.unit.config.ts -silent -noStackTrace -runInBand -watchAll"
