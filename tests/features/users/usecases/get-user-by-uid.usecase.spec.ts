@@ -14,9 +14,10 @@ describe('Get user by uid usecase tests', () => {
 	test('Should return an user entity', async () => {
 		const sut = makeSut();
 
-		jest.spyOn(UsersRepository.prototype, 'getUserByUid').mockResolvedValue(
-			new UserEntity()
-		);
+		jest.spyOn(
+			UsersRepository.prototype,
+			'getUserByUid'
+		).mockResolvedValueOnce(new UserEntity());
 
 		const result = await sut.execute('valid-uid');
 
@@ -27,9 +28,10 @@ describe('Get user by uid usecase tests', () => {
 	test('Should return null', async () => {
 		const sut = makeSut();
 
-		jest.spyOn(UsersRepository.prototype, 'getUserByUid').mockResolvedValue(
-			null
-		);
+		jest.spyOn(
+			UsersRepository.prototype,
+			'getUserByUid'
+		).mockResolvedValueOnce(null);
 
 		const result = await sut.execute('invalid-uid');
 

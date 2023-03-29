@@ -11,11 +11,11 @@
 		"migration:run": "typeorm-ts-node-commonjs migration:run -d src/main/configs/database.config.ts",
 		"pretest": "clear",
 		"pretest:coverage": "clear",
-		"test": "jest --silent --verbose --noStackTrace --runInBand --detectOpenHandles",
+		"test": "jest --silent --verbose --noStackTrace --runInBand",
 		"test:coverage": "jest --runInBand --coverage",
 		"pretest:unit": "clear",
 		"pretest:unit:coverage": "clear",
-		"test:unit": "jest -c jest.unit.config.ts --silent --verbose --noStackTrace --runInBand --detectOpenHandles",
+		"test:unit": "jest -c jest.unit.config.ts --silent --verbose --noStackTrace --runInBand",
 		"test:unit:coverage": "jest -c jest.unit.config.ts --silent --noStackTrace --runInBand --coverage"
 	},
 	"license": "ISC",
